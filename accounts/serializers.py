@@ -11,7 +11,12 @@ class AccountSerializer(serializers.ModelSerializer):
 
     def create(self, validated_data):
         user = Account.objects.create(
+            name=validated_data['name'],
+            surname=validated_data['surname'],
             email=validated_data['email'],
+            role=validated_data['role'],
+            school=validated_data['school'],
+            programme=validated_data['programme'],
             username=validated_data['username'],
             password=make_password(validated_data['password'])
         )
