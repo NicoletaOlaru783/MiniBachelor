@@ -1,5 +1,26 @@
+from django.contrib.auth.base_user import BaseUserManager
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, UserManager
+
+
+from django.contrib.auth.hashers import make_password
+
+
+class UserManager(BaseUserManager):
+    def create_user(self, email, username, password, alias=None):
+        user = self.model(
+            email=self.normalize_email(email),
+            username=username,)
+        user.set_password(make_password(password))
+        user.save()
+        return user
+
+    def create_superuser(self, email, username, password):
+        user = self.create_user(email, username, password)
+        user.is_staff()
+        user.is_superuser = True
+        user.save()
+        return user
 
 
 class Account(AbstractBaseUser):
