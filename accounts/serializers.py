@@ -10,7 +10,7 @@ class AccountSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
     def create(self, validated_data):
-        user = MyAccountManager.objects.create(
+        user = Account.objects.create(
             username=validated_data['username'],
             password=make_password(validated_data['password'])
         )
