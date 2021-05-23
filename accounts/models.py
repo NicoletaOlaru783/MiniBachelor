@@ -3,6 +3,7 @@ from django.contrib.auth.models import AbstractBaseUser, UserManager
 
 
 class Account(AbstractBaseUser):
+    username = models.CharField(max_length=255)
     name = models.CharField(max_length=50)
     surname = models.CharField(max_length=50)
     password = models.CharField(max_length=50)
@@ -17,7 +18,7 @@ class Account(AbstractBaseUser):
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
 
-    objects = UserManager()
+    objects = UserManager('surname', 'name')
 
     def __str__(self):
         return self.name + " " + self.surname
