@@ -5,7 +5,6 @@ from django.contrib.auth.models import AbstractBaseUser
 class Account(AbstractBaseUser):
     name = models.CharField(max_length=50)
     surname = models.CharField(max_length=50)
-    email = models.EmailField(max_length=100, unique=True)
     password = models.CharField(max_length=50)
     role = models.CharField(max_length=50)
     school = models.CharField(max_length=50)
@@ -13,7 +12,7 @@ class Account(AbstractBaseUser):
     created_at = models.DateTimeField(auto_now_add=True)
     username = None
 
-    email = models.EmailField(_('email address'), unique=True)
+    email = models.EmailField(('email address'), unique=True)
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
