@@ -14,16 +14,23 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Account',
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('id', models.AutoField(auto_created=True,
+                 primary_key=True, serialize=False, verbose_name='ID')),
+                ('password', models.CharField(
+                    max_length=128, verbose_name='password')),
                 ('name', models.CharField(max_length=50)),
                 ('surname', models.CharField(max_length=50)),
+                ('username', models.CharField(max_length=50, null=True, blank=True)),
                 ('email', models.EmailField(max_length=100, unique=True)),
-                ('username', models.CharField(max_length=100, unique=True)),
-                ('password', models.CharField(max_length=50)),
                 ('role', models.CharField(max_length=50)),
                 ('school', models.CharField(max_length=50)),
                 ('programme', models.CharField(max_length=50)),
                 ('created_at', models.DateTimeField(auto_now_add=True)),
+                ('last_login', models.DateTimeField(auto_now_add=True)),
+                ('is_admin', models.BooleanField(default=False)),
+                ('is_staff', models.BooleanField(default=False)),
+                ('is_active', models.BooleanField(default=False)),
+                ('is_superadmin', models.BooleanField(default=False)),
             ],
         ),
     ]
