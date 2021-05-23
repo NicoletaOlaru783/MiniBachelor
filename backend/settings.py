@@ -143,7 +143,7 @@ STATIC_URL = '/static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-AUTH_USER_MODEL = 'backend.Account'
+AUTH_USER_MODEL = 'accounts.Account'
 
 # Configure Django App for Heroku.
 django_heroku.settings(locals())
