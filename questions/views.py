@@ -13,9 +13,8 @@ class QuestionViewSet(viewsets.ModelViewSet):
     permission_classes = (IsAuthenticated,)
 
     def perform_create(self, serializer):
-        self.userName = self.request.user.name
-        self.userSurname = self.request.user.surname
-        serializer.save(userName=self.request.user.name)
+        serializer.save(userName=self.request.user.name,
+                        userSurname=self.request.user.surname)
 
     def get_queryset(self):
         queryset = Question.objects.all()
