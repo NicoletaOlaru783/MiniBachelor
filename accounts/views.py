@@ -12,11 +12,16 @@ from rest_framework.response import Response
 class AccountViewSet(viewsets.ModelViewSet):
 
     serializer_class = AccountSerializer
-    queryset = Account.objects.all()
 
-    permission_classes = (IsAuthenticated,)
+    def get_permissions(self):
+        if self.action == 'retrieve':
+            permission_classes = [IsAuthenticated]
+        else:
+            permission_classes = [permissions.AllowAny]
+        return [permission() for permission in permission_classes]
 
     def get_queryset(self):
+        queryset = Account.objects.all()
 
         # Query tags allowed
         id = self.request.query_params.get('id')

@@ -8,10 +8,6 @@ class AccountSerializer(serializers.ModelSerializer):
     class Meta:
         model = Account
         fields = '__all__'
-        # Check if user is authenticated
-        permission_classes = [
-            permissions.AllowAny
-        ]
 
     def create(self, validated_data):
         user = Account.objects.create(
