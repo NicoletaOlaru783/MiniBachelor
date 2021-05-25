@@ -2,6 +2,7 @@ from accounts.models import Account
 from .models import Question
 from rest_framework import viewsets, permissions
 from .serializers import QuestionSerializer
+from accounts.serializers import AccountSerializer
 from rest_framework.permissions import IsAuthenticated
 
 # QuestionViewSet
@@ -28,8 +29,9 @@ class QuestionViewSet(viewsets.ModelViewSet):
             queryset = queryset.filter(isPublic=isPublic)
 
         # fields from user
+        user = self.request.user
         if school is not None:
-            queryset = queryset.filter(school=school)
+            queryset = queryset.filter(user=school)
         return queryset
 
     serializer_class = QuestionSerializer
