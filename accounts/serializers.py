@@ -1,5 +1,5 @@
 from django.contrib.auth.models import User
-from rest_framework import serializers
+from rest_framework import permissions, serializers
 from django.contrib.auth.hashers import make_password
 from .models import Account, MyAccountManager
 
@@ -8,6 +8,10 @@ class AccountSerializer(serializers.ModelSerializer):
     class Meta:
         model = Account
         fields = '__all__'
+        # Check if user is authenticated
+        permission_classes = [
+            permissions.AllowAny
+        ]
 
     def create(self, validated_data):
         user = Account.objects.create(
