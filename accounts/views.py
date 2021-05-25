@@ -15,10 +15,8 @@ class AccountViewSet(viewsets.ModelViewSet):
 
     def get_queryset(self):
         queryset = Account.objects.all()
-        method = self.request.method
 
-        if method == 'GET':
-            permission_classes = (IsAuthenticated,)
+        permission_classes = (IsAuthenticated,)
 
         # Query tags allowed
         id = self.request.query_params.get('id')
