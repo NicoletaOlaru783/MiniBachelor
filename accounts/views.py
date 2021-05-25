@@ -15,7 +15,9 @@ class AccountViewSet(viewsets.ModelViewSet):
     serializer_class = AccountSerializer
 
     def get_permissions(self):
-        if (Q(self.action == 'list') | Q(self.action == 'retrieve')):
+        if self.action == 'list':
+            permission_classes = [IsAuthenticated]
+        elif self.action == 'retrieve':
             permission_classes = [IsAuthenticated]
         else:
             permission_classes = [permissions.AllowAny]
