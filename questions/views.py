@@ -2,6 +2,7 @@ from .models import Question
 from rest_framework import viewsets, permissions
 from .serializers import QuestionSerializer
 from rest_framework.permissions import IsAuthenticated
+from django.contrib.auth.models import User
 
 # QuestionViewSet
 
@@ -16,6 +17,8 @@ class QuestionViewSet(viewsets.ModelViewSet):
         id = self.request.query_params.get('id')
         user = self.request.query_params.get('user')
         isPublic = self.request.query_params.get('isPublic')
+        # fields from user
+        school = self.request.query_params.get('school')
 
         if id is not None:
             queryset = queryset.filter(id=id)
@@ -23,6 +26,10 @@ class QuestionViewSet(viewsets.ModelViewSet):
             queryset = queryset.filter(user=user)
         if isPublic is not None:
             queryset = queryset.filter(isPublic=isPublic)
+
+        # fields from user
+        if school is not None:
+            queryset = User.objects.filter(school=school)
 
         return queryset
 
