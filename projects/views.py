@@ -14,6 +14,9 @@ class ProjectViewSet(viewsets.ModelViewSet):
         serializer.save(userName=self.request.user.name,
                         userSurname=self.request.user.surname)
 
+    def perform_destroy(self, instance):
+        instance.delete(user=self.request.user.id)
+
     def get_queryset(self):
         queryset = Project.objects.all()
         # Query tags allowed
