@@ -3,17 +3,22 @@ from rest_framework import viewsets, permissions
 from .serializers import AccountSerializer
 from rest_framework.permissions import IsAuthenticated
 
+from rest_framework import status
+from rest_framework.response import Response
+
 # AccountViewSet
 
 
 class AccountViewSet(viewsets.ModelViewSet):
-    # Check if user is authenticated
-    permission_classes = [
-        permissions.AllowAny
-    ]
 
-    def get_queryset(self):
+    serializer_class = AccountSerializer
+
+    def retrieve(self, request, *args, **kwargs):
+        # Check if user is authenticated
+        permission_classes = (IsAuthenticated,)
+
         queryset = Account.objects.all()
+
         # Query tags allowed
         id = self.request.query_params.get('id')
         email = self.request.query_params.get('email')
@@ -29,9 +34,18 @@ class AccountViewSet(viewsets.ModelViewSet):
             queryset = queryset.filter(programme=programme)
         if role is not None:
             queryset = queryset.filter(role=role)
-        if programme is not None:
+        if school is not None:
             school = queryset.filter(school=school)
 
         return queryset
 
-    serializer_class = AccountSerializer
+    def create(self, request, *args, **kwargs):
+        # Check if user is authenticated
+        permission_classes = [
+            permissions.AllowAny
+        ]
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        self.perform_create(serializer)
+        headers = self.get_success_headers(serializer.data)
+        return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
