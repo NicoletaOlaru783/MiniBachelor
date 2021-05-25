@@ -38,6 +38,6 @@ class AccountViewSet(viewsets.ModelViewSet):
         if role is not None:
             queryset = queryset.filter(role=role)
         if school is not None:
-            school = queryset.filter(school=school)
+            queryset = queryset.filter(school=school)
 
         return queryset
