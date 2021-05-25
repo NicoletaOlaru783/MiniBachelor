@@ -15,7 +15,7 @@ class ProjectViewSet(viewsets.ModelViewSet):
                         userSurname=self.request.user.surname)
 
     def perform_destroy(self, instance):
-        instance.delete()
+        instance.delete(user__id=self.request.user.id)
 
     def get_queryset(self):
         queryset = Project.objects.all()
