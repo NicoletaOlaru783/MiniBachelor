@@ -15,7 +15,7 @@ class QuestionViewSet(viewsets.ModelViewSet):
     def perform_create(self, serializer):
         self.userName = self.request.user.name
         self.userSurname = self.request.user.surname
-        serializer.save()
+        serializer.save(userName=self.request.user.name)
 
     def get_queryset(self):
         queryset = Question.objects.all()
