@@ -20,6 +20,7 @@ class QuestionViewSet(viewsets.ModelViewSet):
         isPublic = self.request.query_params.get('isPublic')
         # fields from user
         school = self.request.query_params.get('school')
+        programme = self.request.query_params.get('programme')
 
         if id is not None:
             queryset = queryset.filter(id=id)
@@ -29,9 +30,15 @@ class QuestionViewSet(viewsets.ModelViewSet):
             queryset = queryset.filter(isPublic=isPublic)
 
         # fields from user
-        user = self.request.user.school
         if school is not None:
+            user = self.request.user.school
             queryset = queryset.filter(user__school=school)
+
+        # fields from user
+        if programme is not None:
+            user = self.request.user.programme
+            queryset = queryset.filter(user__programme=programme)
+
         return queryset
 
     serializer_class = QuestionSerializer
