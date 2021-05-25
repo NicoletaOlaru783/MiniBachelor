@@ -29,7 +29,7 @@ class QuestionViewSet(viewsets.ModelViewSet):
 
         # fields from user
         if school is not None:
-            queryset = Account.objects.filter(school=school)
+            queryset = Account.objects.get(school=school)
 
         return queryset
 
