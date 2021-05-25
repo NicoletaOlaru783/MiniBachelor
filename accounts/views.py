@@ -19,8 +19,6 @@ class AccountViewSet(viewsets.ModelViewSet):
 
         if method == 'GET':
             permission_classes = (IsAuthenticated,)
-        if method == 'POST':
-            permission_classes = [permissions.AllowAny]
 
         # Query tags allowed
         id = self.request.query_params.get('id')
