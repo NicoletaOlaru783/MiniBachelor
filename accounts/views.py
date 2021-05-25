@@ -13,7 +13,7 @@ class AccountViewSet(viewsets.ModelViewSet):
 
     serializer_class = AccountSerializer
 
-    def get_queryset(self, request):
+    def get_queryset(self):
         queryset = Account.objects.all()
         method = self.request.method
 
