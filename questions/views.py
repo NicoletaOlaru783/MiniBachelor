@@ -1,9 +1,8 @@
+from backend.accounts.models import Account
 from .models import Question
 from rest_framework import viewsets, permissions
 from .serializers import QuestionSerializer
 from rest_framework.permissions import IsAuthenticated
-from django.contrib.auth.models import User
-
 # QuestionViewSet
 
 
@@ -29,7 +28,7 @@ class QuestionViewSet(viewsets.ModelViewSet):
 
         # fields from user
         if school is not None:
-            queryset = User.objects.filter(school=school)
+            queryset = Account.objects.filter(school=school)
 
         return queryset
 
