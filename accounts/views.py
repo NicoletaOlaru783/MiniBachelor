@@ -2,10 +2,8 @@ from .models import Account
 from rest_framework import viewsets, permissions
 from .serializers import AccountSerializer
 from rest_framework.permissions import IsAuthenticated
-from django.db.models import Q
 
 from rest_framework import status
-from rest_framework.response import Response
 
 # AccountViewSet
 
@@ -39,7 +37,7 @@ class AccountViewSet(viewsets.ModelViewSet):
             queryset = queryset.filter(programme=programme)
         if role is not None:
             queryset = queryset.filter(role=role)
-        if programme is not None:
+        if school is not None:
             school = queryset.filter(school=school)
 
         return queryset
