@@ -1,8 +1,9 @@
-from backend.accounts.models import Account
+from accounts.models import Account
 from .models import Question
 from rest_framework import viewsets, permissions
 from .serializers import QuestionSerializer
 from rest_framework.permissions import IsAuthenticated
+
 # QuestionViewSet
 
 
