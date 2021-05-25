@@ -14,6 +14,10 @@ class QuestionViewSet(viewsets.ModelViewSet):
 
     def get_queryset(self):
         queryset = Question.objects.all()
+
+        self.userName = self.request.user.name
+        self.userSurname = self.request.user.surname
+
         # Query tags allowed
         id = self.request.query_params.get('id')
         user = self.request.query_params.get('user')
