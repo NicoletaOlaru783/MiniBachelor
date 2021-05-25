@@ -2,6 +2,7 @@ from .models import Account
 from rest_framework import viewsets, permissions
 from .serializers import AccountSerializer
 from rest_framework.permissions import IsAuthenticated
+from django.db.models import Q
 
 from rest_framework import status
 from rest_framework.response import Response
@@ -14,7 +15,7 @@ class AccountViewSet(viewsets.ModelViewSet):
     serializer_class = AccountSerializer
 
     def get_permissions(self):
-        if self.action == 'list, retrieve':
+        if (Q(self.action == 'list') | Q(self.action == 'retrieve')):
             permission_classes = [IsAuthenticated]
         else:
             permission_classes = [permissions.AllowAny]
