@@ -31,7 +31,7 @@ class QuestionViewSet(viewsets.ModelViewSet):
         # fields from user
         user = self.request.user.school
         if school is not None:
-            queryset = queryset.filter(user=school)
+            queryset = queryset.filter(school=user)
         return queryset
 
     serializer_class = QuestionSerializer
