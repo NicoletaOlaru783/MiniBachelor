@@ -12,11 +12,13 @@ class QuestionViewSet(viewsets.ModelViewSet):
     # Check if user is authenticated
     permission_classes = (IsAuthenticated,)
 
+    def perform_create(self, serializer):
+        userName = self.request.user.name
+        userSurname = self.request.user.surname
+        serializer.save(userName, userSurname)
+
     def get_queryset(self):
         queryset = Question.objects.all()
-        if self.action == 'create':
-            self.userName = self.request.user.name
-            self.userSurname = self.request.user.surname
 
         # Query tags allowed
         id = self.request.query_params.get('id')
