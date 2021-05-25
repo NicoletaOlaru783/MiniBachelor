@@ -7,8 +7,8 @@ from accounts.models import Account
 class Question(models.Model):
     user = models.ForeignKey(Account, on_delete=models.CASCADE)
 
-    userName = models.CharField(max_length=50)
-    userSurname = models.CharField(max_length=50)
+    userName = models.CharField(max_length=50, blank=True)
+    userSurname = models.CharField(max_length=50, blank=True)
     title = models.CharField(max_length=100)
     description = models.CharField(max_length=250)
     isPublic = models.BooleanField(default=True)
