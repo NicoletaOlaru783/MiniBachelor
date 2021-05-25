@@ -31,6 +31,6 @@ class QuestionViewSet(viewsets.ModelViewSet):
         if school is not None:
             queryset = Account.objects.filter(school=school)
 
-        serializer_class = QuestionSerializer(queryset, many=True)
+        serializer_class = QuestionSerializer
 
         return queryset
