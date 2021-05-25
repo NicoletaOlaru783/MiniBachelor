@@ -29,7 +29,7 @@ class QuestionViewSet(viewsets.ModelViewSet):
             queryset = queryset.filter(isPublic=isPublic)
 
         # fields from user
-        user = self.request.user
+        user = self.request.user["school"]
         if school is not None:
             queryset = queryset.filter(user=school)
         return queryset
