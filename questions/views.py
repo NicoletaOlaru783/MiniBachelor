@@ -29,8 +29,7 @@ class QuestionViewSet(viewsets.ModelViewSet):
 
         # fields from user
         if school is not None:
-            queryset = Account.objects.filter(school=school)
-
-        serializer_class = QuestionSerializer
-
+            queryset = queryset.filter(school=school)
         return queryset
+
+    serializer_class = QuestionSerializer
